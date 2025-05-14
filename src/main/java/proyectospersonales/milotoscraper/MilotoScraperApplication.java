@@ -1,9 +1,13 @@
 package proyectospersonales.milotoscraper;
 
+import org.openqa.selenium.WebDriver;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import proyectospersonales.milotoscraper.config.SeleniumConfig;
 import proyectospersonales.milotoscraper.scraper.MilotoScraper;
+
 
 @SpringBootApplication
 public class MilotoScraperApplication implements CommandLineRunner {
@@ -22,7 +26,13 @@ public class MilotoScraperApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        milotoScraper.scrape();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SeleniumConfig.class);
+        WebDriver driver = context.getBean(WebDriver.class);
+
+        MilotoScraper scraper = new MilotoScraper(driver);
+        scraper.scrape();
+
+        //driver.quit();
     }
 
 }
