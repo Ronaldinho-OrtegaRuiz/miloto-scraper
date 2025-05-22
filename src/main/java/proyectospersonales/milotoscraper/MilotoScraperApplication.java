@@ -32,7 +32,7 @@ public class MilotoScraperApplication implements CommandLineRunner {
         MilotoScraper scraper = new MilotoScraper(driver);
         scraper.scrape();
 
-        //driver.quit();
+        driver.quit();
     }
 
 }

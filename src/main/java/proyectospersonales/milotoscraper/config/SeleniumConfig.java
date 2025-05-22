@@ -16,7 +16,6 @@ public class SeleniumConfig {
 
         ChromeOptions options = new ChromeOptions();
 
-        // ❗ Comenta esta si quieres ver el navegador
         // options.addArguments("--headless=new");
 
         options.addArguments("--disable-gpu");
