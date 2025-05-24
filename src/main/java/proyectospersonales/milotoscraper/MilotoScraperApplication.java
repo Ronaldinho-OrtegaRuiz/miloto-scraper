@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import proyectospersonales.milotoscraper.analyzer.MilotoAnalyzer;
 import proyectospersonales.milotoscraper.config.SeleniumConfig;
 import proyectospersonales.milotoscraper.scraper.MilotoScraper;
 
@@ -13,9 +14,11 @@ import proyectospersonales.milotoscraper.scraper.MilotoScraper;
 public class MilotoScraperApplication implements CommandLineRunner {
 
     private final MilotoScraper milotoScraper;
+    private final MilotoAnalyzer milotoAnalyzer;
 
-    public MilotoScraperApplication(MilotoScraper milotoScraper) {
+    public MilotoScraperApplication(MilotoScraper milotoScraper, MilotoAnalyzer milotoAnalyzer) {
         this.milotoScraper = milotoScraper;
+        this.milotoAnalyzer = milotoAnalyzer;
     }
 
 
@@ -29,10 +32,12 @@ public class MilotoScraperApplication implements CommandLineRunner {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SeleniumConfig.class);
         WebDriver driver = context.getBean(WebDriver.class);
 
-        MilotoScraper scraper = new MilotoScraper(driver);
-        scraper.scrape();
+        //MilotoScraper scraper = new MilotoScraper(driver);
+        //scraper.scrape();
+        //driver.quit();
 
-        driver.quit();
+        MilotoAnalyzer analyzer = new MilotoAnalyzer();
+        analyzer.analyze();
     }
 
 }
